@@ -2,7 +2,7 @@
 //  Curve.swift
 //  TicTacToe
 //
-//  Created by gliao on 2020-03-24.
+//  Created by Victor Yang
 //  Copyright © 2020 COMP2601. All rights reserved.
 //
 
@@ -20,7 +20,7 @@ struct Curve {
     static let SLOPE_CLOSENESS_THRESHOLD: Float = 5;
     
     static func isO(_ curve: Curve) -> (Bool, String?) {
-        return (true, "An O is drawn");
+        return (true, "An O is drawn"); //this was added for thesis
         
         // If a curve follows one of these general directions, then it's an O
         let expectedDirections1 = [Direction.LEFT, Direction.DOWN, Direction.RIGHT, Direction.UP, Direction.LEFT];

@@ -2,7 +2,7 @@
 //  TicTacToe.swift
 //  TicTacToe
 //
-//  Created by gliao on 2020-03-24.
+//  Created by Victor Yang
 //  Copyright © 2020 COMP2601. All rights reserved.
 //
 
@@ -23,7 +23,7 @@ class TicTacToe: CustomStringConvertible {
         board = Array(repeating: Array(repeating: Player.EMPTY, count: 3), count: 3);
     }
     
-    func getBoard() -> [[Player]] { //added for thesis
+    func getBoard() -> [[Player]] { //getter for the game board (added for thesis)
         return board;
     }
     

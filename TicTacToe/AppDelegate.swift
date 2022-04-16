@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  TicTacToe
 //
-//  Created by gliao on 2020-03-24.
+//  Created by Victor Yang
 //  Copyright © 2020 COMP2601. All rights reserved.
 //
 

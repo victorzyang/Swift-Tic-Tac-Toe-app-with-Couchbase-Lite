@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edg-Ab-G80">
-                                <rect key="frame" x="170" y="795" width="74" height="30"/>
+                                <rect key="frame" x="104" y="646" width="216" height="192"/>
                                 <state key="normal" title="Show Data"/>
                                 <connections>
                                     <action selector="displayData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VU9-ee-A3l"/>
@@ -25,7 +25,11 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Edg-Ab-G80" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="133" id="R7Y-sT-SoG"/>
                             <constraint firstItem="Edg-Ab-G80" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="TtV-9b-RXZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Edg-Ab-G80" secondAttribute="trailing" constant="133" id="Vs7-aW-DSz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Edg-Ab-G80" secondAttribute="bottom" constant="26" id="YEn-1D-J37"/>
+                            <constraint firstItem="Edg-Ab-G80" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="602" id="vXT-Ta-fSr"/>
                             <constraint firstItem="Edg-Ab-G80" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="y8P-hE-EEM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

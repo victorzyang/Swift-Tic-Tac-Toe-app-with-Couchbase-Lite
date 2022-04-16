@@ -2,16 +2,15 @@
 //  DrawView.swift
 //  TicTacToe
 //
-//  Created by gliao on 2020-03-24.
+//  Created by Victor Yang
 //  Copyright © 2020 COMP2601. All rights reserved.
-// aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 //
 
 import Foundation
 import UIKit
 import CouchbaseLiteSwift //this resolved the 'Use of Unresolved Identifier' error which I was getting from the MutableDocument()
 
-extension UIView {
+extension UIView { //needed for calling UIViewController (ie. ViewController.swift) from UIView
     var parentViewController: UIViewController? {
         // Starts from next (As we know self is not a UIViewController).
         var parentResponder: UIResponder? = self.next
@@ -346,25 +345,20 @@ class DrawView: UIView {
             currentCurves.removeAll();
         }
         
-        //TODO: call function in ViewController.swift to insert data to database
-        //parentViewController.somefunction()
-        
-        //iterate over TicTacToe.board to get the coordinates
-        
-        //How would I determine if board[r][c] == "X" or "O"
-        // Maybe it is board[r][c]==Player.O (if not, then search how to convert enum to string)
-        
-        if let winner = board?.getWinner() {
+        //A document is added whenever game is over. That is whenever there's a winner or the game board is full
+        if let winner = board?.getWinner() { //creates all required data to insert a new document into database whenever there's a winner
             errorMessage = "Player \(winner) wins!";
-            let mutableDoc = MutableDocument();
+            let mutableDoc = MutableDocument(); // Create a new document (i.e. a record) to add in the database
             //let mutableDict = DictionaryObject();
-            let gamesDict = MutableDictionaryObject(); //I think this should work now?
+            let gamesDict = MutableDictionaryObject();
             //let mutableDict = NSMutableDictionary(); // I don't think this works
             //let mutableDict = CFMutableDictionary(); // I don't think this works either
             
+            //these are the arrays to be added to document
             let p1steps = MutableArrayObject() //I think this is the right collection
             let p2steps = MutableArrayObject()
 
+            //iterate over TicTacToe.board to get the coordinates of where each player played
             for row in 0..<3 {
                 for col in 0..<3 {
                     if (board?.getBoard()[row][col].get() == "X") {
@@ -383,24 +377,26 @@ class DrawView: UIView {
             
             //let arrayOfNums = [1, 2, 3, 4, 5] //I don't think this format is acceptable for ArrayObject...
             
+            //populate the document to be inserted
             gamesDict.setArray(p1steps, forKey: "Player 1 Steps")
             gamesDict.setArray(p2steps, forKey: "Player 2 Steps")
             gamesDict.setString("Player \(winner) Win", forKey: "Outcome")
             mutableDoc.setString("game", forKey: "type")
             mutableDoc.setDictionary(gamesDict, forKey: "Games")
-            //TODO: call the addGameDocument method in ViewController with mutableDoc passed as argument
-            let vc: ViewController = self.parentViewController! as! ViewController
-            vc.addGameDocument(mutableDoc: mutableDoc)
-        }
-        else if board != nil && board!.isFull() {
-            errorMessage = "It's a tie!";
-            let mutableDoc = MutableDocument();
-            //let mutableDict = NSMutableDictionary() //I don't think this works
-            let gamesDict = MutableDictionaryObject(); //I think this should work now?
             
+            let vc: ViewController = self.parentViewController! as! ViewController //ViewController object used to call the method for adding a row to the database
+            vc.addGameDocument(mutableDoc: mutableDoc) //calls addGameDocument function in ViewController.swift with mutableDoc passed as argument to insert into database
+        }
+        else if board != nil && board!.isFull() { //creates all required data to insert a row into database whenever game ends in a tie
+            errorMessage = "It's a tie!";
+            let mutableDoc = MutableDocument(); // Create a new document (i.e. a record) to add in the database
+            let gamesDict = MutableDictionaryObject();
+            
+            //these are the arrays to be added to document
             let p1steps = MutableArrayObject()
             let p2steps = MutableArrayObject()
             
+            //iterate over TicTacToe.board to get the coordinates of where each player played
             for row in 0..<3 {
                 for col in 0..<3 {
                     if (board?.getBoard()[row][col].get() == "X") {
@@ -416,15 +412,16 @@ class DrawView: UIView {
                     }
                 }
             }
-                        
+            
+            //populate the document to be inserted
             gamesDict.setArray(p1steps, forKey: "Player 1 Steps")
             gamesDict.setArray(p2steps, forKey: "Player 2 Steps")
             gamesDict.setString("Tie", forKey: "Outcome")
             mutableDoc.setString("game", forKey: "type")
             mutableDoc.setDictionary(gamesDict, forKey: "Games")
-            //TODO: call the addGameDocument method in ViewController with mutableDoc passed as argument
-            let vc: ViewController = self.parentViewController! as! ViewController
-            vc.addGameDocument(mutableDoc: mutableDoc)
+            
+            let vc: ViewController = self.parentViewController! as! ViewController //ViewController object used to call the method for adding a row to the database
+            vc.addGameDocument(mutableDoc: mutableDoc) //calls addGameDocument function in ViewController.swift with mutableDoc passed as argument to insert into database
         }
         
         setNeedsDisplay();
