@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         
         var message = "" //this is the variable containing everything to display to the UI
         
-        print("Selecting all games from the games table")
+        print("Selecting all games from the Database")
         
         //run the 'resultSet' query
         do {
