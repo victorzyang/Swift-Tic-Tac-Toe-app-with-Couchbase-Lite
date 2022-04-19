@@ -17,9 +17,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        print("Opening database")
+        
         // Get the database (and create it if it doesn’t exist).
         //let database: Database
         do {
+            print("Successfully opened Database")
             database = try Database(name: "gamesDB")
         } catch {
             fatalError("Error opening database")
@@ -29,7 +32,9 @@ class ViewController: UIViewController {
     
     func addGameDocument(mutableDoc: MutableDocument){
         // Saves document to the database.
+        print("Adding new game document to database")
         do {
+            print("Successfully added document to database")
             try database?.saveDocument(mutableDoc)
         } catch {
             fatalError("Error saving document")
@@ -49,6 +54,8 @@ class ViewController: UIViewController {
             .where(Expression.property("type").equalTo(Expression.string("game")))
         
         var message = "" //this is the variable containing everything to display to the UI
+        
+        print("Selecting all games from the games table")
         
         //run the 'resultSet' query
         do {
